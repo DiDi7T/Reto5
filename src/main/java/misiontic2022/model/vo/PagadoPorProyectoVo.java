@@ -1,13 +1,14 @@
 package misiontic2022.model.vo;
 
-public class ComprasDeLiderVo {
+public class PagadoPorProyectoVo {
     
-    private String id;
+    private Integer id;
     private Double valor;
-    public String getId() {
+    
+    public Integer getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public Double getValor() {
@@ -18,8 +19,9 @@ public class ComprasDeLiderVo {
     }
     @Override
     public String toString() {
-        return "ComprasDeLiderVo [id=" + id + ", valor=" + valor + "]";
+        return "PagadoPorProyectoVo [id=" + id + ", valor=" + valor + "]";
     }
 
     
+
 }

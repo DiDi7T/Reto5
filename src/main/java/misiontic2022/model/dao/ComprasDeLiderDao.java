@@ -11,29 +11,27 @@ import misiontic2022.util.JDBCUtilities;
 
 public class ComprasDeLiderDao {
 
-    public List<ComprasDeLiderVo> listarProyectosPorBanco(String Banco) throws SQLException {
+    public static List<ComprasDeLiderVo> listarLideresQueMenosGastan() throws SQLException {
         List<ComprasDeLiderVo> respuesta = new ArrayList<>();
 
         var conn = JDBCUtilities.getConnection();
         PreparedStatement stmt = null;
         ResultSet rset = null;
         try {
-            var query = "SELECT p.ID_Proyecto ID, p.Constructora, p.Ciudad, p.Clasificacion, t.Estrato,"
-                    + " (l.Nombre || ' ' || l.Primer_Apellido || ' ' || l.Segundo_Apellido) AS LIDER"
-                    + " FROM Proyecto p" + " INNER JOIN Tipo t ON t.ID_Tipo = p.ID_Tipo"
-                    + " INNER JOIN Lider l ON l.ID_Lider = p.ID_Lider" + " WHERE p.Banco_Vinculado = (?)"
-                    + " ORDER BY p.Fecha_Inicio DESC , p.Ciudad ASC , p.Constructora";
+            var query = "SELECT (l.Nombre || ' ' || l.Primer_Apellido || ' ' || l.Segundo_Apellido) AS LIDER,"
+                      + " SUM(c.Cantidad*mc.Precio_Unidad) AS VALOR"
+                      + " FROM Proyecto p"
+                      + " INNER JOIN Compra c ON c.ID_Proyecto = p.ID_Proyecto"
+                      + " INNER JOIN MaterialConstruccion mc ON mc.ID_MaterialConstruccion = c.ID_MaterialConstruccion"
+                      + " INNER JOIN Lider l ON l.ID_Lider = p.ID_Lider"
+                      + " GROUP BY l.Nombre, l.Primer_Apellido, l.Segundo_Apellido" 
+                      + " ORDER BY VALOR LIMIT 10";
             stmt = conn.prepareStatement(query);
-            stmt.setString(1, Banco);
             rset = stmt.executeQuery();
             while (rset.next()) {
                 var vo = new ComprasDeLiderVo();
-                vo.setId(rset.getInt("ID"));
-                vo.setConstructora(rset.getString("Constructora"));
-                vo.setCiudad(rset.getString("Ciudad"));
-                vo.setClasificacion(rset.getString("Clasificacion"));
-                vo.setEstrato(rset.getInt("Estrato"));
-                vo.setLider(rset.getString("LIDER"));
+                vo.setId(rset.getString("LIDER"));
+                vo.setValor(rset.getDouble("VALOR"));
                 respuesta.add(vo);
             }
         } finally {
