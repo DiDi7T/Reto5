@@ -32,9 +32,9 @@ public class ReportesView {
                     "CLASIFICACION", "ESTRATO", "LIDER"));
             System.out.println(repitaCaracter('-', 105));}
 
-            var lista = reportesController.listarProyectosPorBanco("Davivienda");
+            var lista = reportesController.listarProyectosPorBanco(banco);
             for (ProyectoBancoVo proyecto : lista) {
-                System.out.printf("%3d %-25s %-20s %-15s %-7d %-30s %n", proyecto.getId(), proyecto.getConstructora(),
+                System.out.printf("%3d %-25s %-20s %-15s %7d %-30s %n", proyecto.getId(), proyecto.getConstructora(),
                         proyecto.getCiudad(), proyecto.getClasificacion(), proyecto.getEstrato(), proyecto.getLider());
             }
 
@@ -49,12 +49,12 @@ public class ReportesView {
 
             System.out.println(repitaCaracter('=', 1) + " TOTAL PAGADO POR PROYECTO " + repitaCaracter('=', 1));
             if (limiteInferior != null) {
-            System.out.println(String.format("%3s %15s", "ID", "VALOR "));
+            System.out.println(String.format("%3s %14s", "ID", "VALOR "));
             System.out.println(repitaCaracter('-', 29));}
 
-            var lista = reportesController.listarPagadoPorProyecto(50_000d);
+            var lista = reportesController.listarPagadoPorProyecto(limiteInferior);
             for (PagadoPorProyectoVo proyecto : lista) {
-                System.out.printf("%3s %15.1f %n", proyecto.getId(), proyecto.getValor());
+                System.out.printf("%3s %,15.1f %n", proyecto.getId(), proyecto.getValor());
             }    
 
         } catch (SQLException e) {
@@ -68,12 +68,12 @@ public class ReportesView {
         try {
             System.out.println(repitaCaracter('=', 5) + " 10 LIDERES MENOS COMPRADORES "
             + repitaCaracter('=', 6));
-            System.out.println(String.format("%-25s %15s", "LIDER", "VALOR "));
+            System.out.println(String.format("%-25s %14s", "LIDER", "VALOR "));
             System.out.println(repitaCaracter('-', 41));
 
             var lista = reportesController.listarLideresQueMenosGastan();
             for (ComprasDeLiderVo proyecto : lista){
-                System.out.printf("%-25s %15.1f %n", proyecto.getId(), proyecto.getValor());
+                System.out.printf("%-25s %,15.1f %n", proyecto.getId(), proyecto.getValor());
             }
 
         } catch (SQLException e) {

@@ -4,6 +4,7 @@ public class ComprasDeLiderVo {
     
     private String id;
     private Double valor;
+
     public String getId() {
         return id;
     }

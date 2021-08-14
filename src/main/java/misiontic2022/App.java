@@ -12,8 +12,8 @@ public class App
     public static void main( String[] args )
     {
         var view = new ReportesView();
-        view.proyectosFinanciadosPorBanco("Davivienda");
-        view.totalPagadoPorProyectosSuperioresALimite(50_000d);
+        view.proyectosFinanciadosPorBanco("Bancolombia");
+        view.totalPagadoPorProyectosSuperioresALimite(40_000d);
         view.lideresQueMenosGastan();
         
     }
