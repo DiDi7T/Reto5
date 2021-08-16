@@ -11,7 +11,7 @@ import misiontic2022.util.JDBCUtilities;
 
 public class ComprasDeLiderDao {
 
-    public static List<ComprasDeLiderVo> listarLideresQueMenosGastan() throws SQLException {
+    public List<ComprasDeLiderVo> listarLideresQueMenosGastan() throws SQLException {
         List<ComprasDeLiderVo> respuesta = new ArrayList<>();
 
         var conn = JDBCUtilities.getConnection();

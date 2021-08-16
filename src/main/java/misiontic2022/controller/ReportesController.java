@@ -31,6 +31,6 @@ public class ReportesController {
     }
 
     public List<ComprasDeLiderVo> listarLideresQueMenosGastan()throws SQLException{
-        return ComprasDeLiderDao.listarLideresQueMenosGastan();
+        return comprasDeLiderDao.listarLideresQueMenosGastan();
     }
 }
