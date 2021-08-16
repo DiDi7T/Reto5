@@ -1,10 +1,10 @@
 package misiontic2022;
 
 
-import misiontic2022.view.FrmView;
+
 import misiontic2022.view.FrmVista;
-import misiontic2022.view.NewJFrame;
-import misiontic2022.view.ReportesView;
+
+// import misiontic2022.view.ReportesView;
 
 /**
  * Hello world!

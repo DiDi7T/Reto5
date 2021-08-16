@@ -1,7 +1,7 @@
 
 package misiontic2022.view;
 
-import java.awt.BorderLayout;
+// import java.awt.BorderLayout;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.List;
